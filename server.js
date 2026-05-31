@@ -1,7 +1,10 @@
+require("dotenv").config(); // config -> it is the function in the env which load the data from the env to the anothers files 
 const express = require("express");
+const errorHandler = require("./middleware/errorHandlers");
+const connectDB = require("./config/connectdb")
 const app = express();
 
-require("dotenv").config(); // config -> it is the function in the env which load the data from the env to the anothers files 
+
 
 app.use(express.json()) //“Tell Express to automatically read JSON data from incoming requests and convert it into req.body.”
 
@@ -14,7 +17,10 @@ const port = process.env.PORT || 5000;
 // });
 
 app.use("/api/contacts",require("./routes/contactRoute"))
+app.use(errorHandler)
 
-app.listen(port, () => {
-    console.log(`the port is running on ${port}`);
+connectDB().then(() => {
+    app.listen(port, () => {
+        console.log(`Server is running on port ${port}`);
+    });
 });
