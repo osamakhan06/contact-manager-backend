@@ -6,8 +6,6 @@ const {getContact,createContact,updateContact,deleteContact,specificContact} = r
 //     res.status(200).send({message:"get all the contacts"})
 // })
 
-
-
 // router.route("/").get(getContact)
 
 // router.route("/").post(createContact)
@@ -17,13 +15,11 @@ const {getContact,createContact,updateContact,deleteContact,specificContact} = r
 
  router.route("/").get(getContact).post(createContact)
 
-
 // router.route("/:id").put(updateContact)
 
 // router.route("/:id").delete(deleteContact)
 
 // router.route("/:id").get(specificContact)
-
 
 // OR
 
