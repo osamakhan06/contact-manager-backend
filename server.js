@@ -1,7 +1,8 @@
 require("dotenv").config(); // config -> it is the function in the env which load the data from the env to the anothers files 
 const express = require("express");
 const errorHandler = require("./middleware/errorHandlers");
-const connectDB = require("./config/connectdb")
+const connectDB = require("./config/connectdb");
+const validateToken = require("./middleware/validateToken");
 const app = express();
 
 
