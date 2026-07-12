@@ -1,37 +1,57 @@
-const constant = require ("../constant")
+const constant = require("../constant");
 
+const errorHandler = (err, req, res, next) => {
+    const statusCode = res.statusCode ? res.statusCode : 500;
 
-const errorHandler = (err,req,res)=>{
-    const statusCode = res.statusCode?res.statusCode:500
-    
-    switch(statusCode){
+    switch (statusCode) {
         case constant.VALIDATION_ERROR:
-            res.json({title:"not found",message:err.message,stackTrace:err.stack})
+            res.status(statusCode).json({
+                title: "VALIDATION ERROR",
+                message: err.message,
+                stackTrace: err.stack,
+            });
+            break;
 
-        break;
         case constant.NOT_FOUND:
-    res.json({title:"NOT FOUND",message:err.message,stackTrace:err.stack})
-     break;
+            res.status(statusCode).json({
+                title: "NOT FOUND",
+                message: err.message,
+                stackTrace: err.stack,
+            });
+            break;
+
         case constant.FORBIDDEN:
-    res.json({title:"FORBIDDEN ERROR",message:err.message,stackTrace:err.stack})
+            res.status(statusCode).json({
+                title: "FORBIDDEN",
+                message: err.message,
+                stackTrace: err.stack,
+            });
+            break;
 
-     break;
         case constant.UNAUTHORIZED:
-    res.json({title:"UNOTHERIZED",message:err.message,stackTrace:err.stack})
-    
-     break;
+            res.status(statusCode).json({
+                title: "UNAUTHORIZED",
+                message: err.message,
+                stackTrace: err.stack,
+            });
+            break;
+
         case constant.SERVER_ERROR:
-    res.json({title:"SERVER ERROR",message:err.message,stackTrace:err.stack})
-     default:
-        console.log("no error all were good")
-       
+            res.status(statusCode).json({
+                title: "SERVER ERROR",
+                message: err.message,
+                stackTrace: err.stack,
+            });
+            break;
 
+        default:
+            res.status(500).json({
+                title: "SERVER ERROR",
+                message: err.message,
+                stackTrace: err.stack,
+            });
+            break;
     }
+};
 
-    
-
-
-
-}
-
-module.exports = errorHandler
+module.exports = errorHandler;
